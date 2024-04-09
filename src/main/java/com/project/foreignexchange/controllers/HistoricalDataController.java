@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.foreignexchange.dto.HistoricalDataDTO;
 import com.project.foreignexchange.services.HistoricalRateService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class HistoricalDataController {
 
@@ -27,8 +29,9 @@ public class HistoricalDataController {
 		this.service = service;
 	}
 
+	@Operation(summary = "Read conversion history")
 	@GetMapping("/history")
-	public ResponseEntity<Map<String, BigDecimal>> conversionRate(HistoricalDataDTO historicalData) {
+	public ResponseEntity<Map<String, BigDecimal>> getConversionHistory(HistoricalDataDTO historicalData) {
 		Map<String, BigDecimal> historicalDataResponse = this.service.extractHistoricalData(historicalData);
 		return ResponseEntity.status(HttpStatus.OK).body(historicalDataResponse);
 	}

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.foreignexchange.dto.ConversionDTO;
 import com.project.foreignexchange.services.ConversionApiService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class ConversionApiController {
 
@@ -26,8 +28,9 @@ public class ConversionApiController {
 		this.service = service;
 	}
 
+	@Operation(summary = "Convert currencies")
 	@GetMapping("/convert")
-	public ResponseEntity<Map<String, Object>> conversionRate(ConversionDTO conversion) {
+	public ResponseEntity<Map<String, Object>> getConversionRate(ConversionDTO conversion) {
 		Map<String, Object> conversionResult = this.service.extractConversionResult(conversion);
 		return ResponseEntity.status(HttpStatus.OK).body(conversionResult);
 	}

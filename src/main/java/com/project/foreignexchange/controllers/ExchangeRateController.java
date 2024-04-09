@@ -11,6 +11,8 @@ import com.project.foreignexchange.domain.ExchangeResponse;
 import com.project.foreignexchange.dto.ExchangeDTO;
 import com.project.foreignexchange.services.ExchangeRateService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class ExchangeRateController {
 
@@ -31,6 +33,7 @@ public class ExchangeRateController {
 		this.service = service;
 	}
 
+	@Operation(summary = "Add exchange rate")
 	@PostMapping("/exchange")
     public ResponseEntity<ExchangeResponse> addExchangeRate(@RequestBody ExchangeDTO exchangeRequest) {
         ExchangeResponse exchangeResponse = this.service.assembleExchangeResponse(exchangeRequest);
